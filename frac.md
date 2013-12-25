@@ -48,7 +48,7 @@ denominator)
 
 ```
         if(x === m) {
-            if(d1 + d2 <= D) d1+=d2, n1+=n2, d2=D+1;
+            if(d1 + d2 <= D) { d1+=d2; n1+=n2; d2=D+1; }
             else if(d1 > d2) d2=D+1;
             else d1=D+1;
             break;
@@ -58,8 +58,8 @@ denominator)
 Otherwise shrink the range:
 
 ```
-        else if(x < m) n2 = n1+n2, d2 = d1+d2;
-        else n1 = n1+n2, d1 = d1+d2;
+        else if(x < m) { n2 = n1+n2; d2 = d1+d2; }
+        else { n1 = n1+n2; d1 = d1+d2; }
     }
 ```
 
@@ -67,17 +67,93 @@ At this point, `d1 > D` or `d2 > D` (but not both -- keep track of how `d1` and
 `d2` change).  So we merely return the desired values:
 
 ```
-    if(d1 > D) d1 = d2, n1 = n2;
+    if(d1 > D) { d1 = d2; n1 = n2; }
     if(!mixed) return [0, n1, d1];
     var q = Math.floor(n1/d1);
     return [q, n1 - q*d1, d1];
 };
 ```
 
+## Continued Fraction Method
+
+The continued fraction technique is employed by various spreadsheet programs.  
+Note that this technique is inferior to the mediant method (at least, according
+to the desired goal of most accurately approximating the floating point number)
+
+```
+frac.cont = function cont(x, D, mixed) {
+```
+
+> Record the sign of x, take b0=|x|, p_{-2}=0, p_{-1}=1, q_{-2}=1, q_{-1}=0
+
+Note that the variables are implicitly indexed at `k` (so `B` refers to `b_k`):
+
+```
+    var sgn = x < 0 ? -1 : 1;
+    var B = x * sgn;
+    var P_2 = 0, P_1 = 1, P = 0;
+    var Q_2 = 1, Q_1 = 0, Q = 0;
+    var A = B|0;
+```
+
+> Iterate
+
+> ... for k = 0,1,...,K, where K is the first instance of k where 
+> either q_{k+1} > Q or b_{k+1} is undefined (b_k = a_k).
+
+```
+    while(Q_1 < D) {
+```
+
+> a_k = [b_k], i.e., the greatest integer <= b_k
+
+```
+        A = B|0;
+```
+
+> p_k = a_k p_{k-1} + p_{k-2}
+> q_k = a_k q_{k-1} + q_{k-2}
+
+```
+        P = A * P_1 + P_2;
+        Q = A * Q_1 + Q_2;
+```
+
+> b_{k+1} = (b_{k} - a_{k})^{-1} 
+
+```
+        if((B - A) < 0.00000001) break;
+```
+
+At the end of each iteration, advance `k` by one step:
+
+``` 
+        B = 1 / (B - A);
+        P_2 = P_1; P_1 = P;
+        Q_2 = Q_1; Q_1 = Q;
+    }
+```
+
+In case we end up overstepping, walk back an iteration or two: 
+
+```
+    if(Q > D) { Q = Q_1; P = P_1; }
+    if(Q > D) { Q = Q_2; P = P_2; }
+```
+
+The final result is `r = (sgn x)p_k / q_k`:
+
+```
+    if(!mixed) return [0, sgn * P, Q];
+    var q = Math.floor(sgn * P/Q);
+    return [q, sgn*P - q*Q, Q];
+};
+```
+
 Finally we put some export jazz:
 
 ```
-if(typeof module !== undefined) module.exports = frac;
+if(typeof module !== 'undefined') module.exports = frac;
 ```
 
 # Tests
@@ -103,7 +179,7 @@ test:
 ```json>package.json
 {
     "name": "frac",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "author": "SheetJS",
     "description": "Rational approximation with bounded denominator",
     "keywords": [ "math", "fraction", "rational", "approximation" ],

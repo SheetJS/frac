@@ -4,6 +4,10 @@ Rational approximation to a floating point number with bounded denominator.
 
 Uses the Mediant Method <https://en.wikipedia.org/wiki/Mediant_(mathematics)>
 
+This module also provides an implementation of the continued fraction method as
+described by Aberth in "A method for exact computation with rational numbers", 
+which appears to be used by spreadsheet programs for displaying fractions
+
 ## JS Installation and Usage
 
 In node:
@@ -30,3 +34,6 @@ For example:
 > frac(Math.PI,100) // [ 0, 22, 7 ]
 > frac(Math.PI,100,true) // [ 3, 1, 7 ]
 ```
+
+`frac.cont` implements the Aberth algorithm (input and output specifications
+match the original `frac` function)
