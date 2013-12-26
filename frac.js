@@ -1,3 +1,4 @@
+/* frac.js (C) 2013 SheetJS -- http://sheetjs.com */
 var frac = function(x, D, mixed) {
     var n1 = Math.floor(x), d1 = 1;
     var n2 = n1+1, d2 = 1;
@@ -27,7 +28,7 @@ frac.cont = function cont(x, D, mixed) {
         A = B|0;
         P = A * P_1 + P_2;
         Q = A * Q_1 + Q_2;
-        if((B - A) < 0.00000001) break;
+        if((B - A) < 0.0000000001) break;
         B = 1 / (B - A);
         P_2 = P_1; P_1 = P;
         Q_2 = Q_1; Q_1 = Q;
