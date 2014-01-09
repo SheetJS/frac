@@ -37,3 +37,15 @@ For example:
 
 `frac.cont` implements the Aberth algorithm (input and output specifications
 match the original `frac` function)
+
+## Tests
+
+Tests generated from Excel have 4 columns.  To produce a similar test:
+
+- Column A contains the raw values
+- Column B format "Up to one digit (1/4)"
+- Column C format "Up to two digits (21/25)"
+- Column D format "Up to three digits (312/943)"
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/731e31b3a26382ccd5d213b9e74ea552 "githalytics.com")](http://githalytics.com/SheetJS/frac)
+

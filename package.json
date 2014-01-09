@@ -1,19 +1,19 @@
 {
-    "name": "frac",
-    "version": "0.2.1",
-    "author": "SheetJS",
-    "description": "Rational approximation with bounded denominator",
-    "keywords": [ "math", "fraction", "rational", "approximation" ],
-    "main": "./frac.js",
-    "dependencies": {},
-    "devDependencies": {"mocha":""},
-    "repository": {
-        "type":"git",
-        "url": "git://github.com/SheetJS/frac.git"
-    },
-    "scripts": {
-        "test": "make test"
-    },
-    "bugs": { "url": "https://github.com/SheetJS/frac/issues" },
-    "engines": { "node": ">=0.8" }
+  "name": "frac",
+  "version": "0.3.0",
+  "author": "SheetJS",
+  "description": "Rational approximation with bounded denominator",
+  "keywords": [ "math", "fraction", "rational", "approximation" ],
+  "main": "./frac.js",
+  "dependencies": {},
+  "devDependencies": {"mocha":"","voc":""},
+  "repository": {
+    "type":"git",
+    "url": "git://github.com/SheetJS/frac.git"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "bugs": { "url": "https://github.com/SheetJS/frac/issues" },
+  "engines": { "node": ">=0.8" }
 }
