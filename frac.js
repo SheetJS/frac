@@ -23,9 +23,9 @@ frac.cont = function cont(x, D, mixed) {
   var B = x * sgn;
   var P_2 = 0, P_1 = 1, P = 0;
   var Q_2 = 1, Q_1 = 0, Q = 0;
-  var A = B|0;
+  var A = Math.floor(B);
   while(Q_1 < D) {
-    A = B|0;
+    A = Math.floor(B);
     P = A * P_1 + P_2;
     Q = A * Q_1 + Q_2;
     if((B - A) < 0.0000000005) break;

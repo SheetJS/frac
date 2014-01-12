@@ -1,6 +1,6 @@
 {
   "name": "frac",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "SheetJS",
   "description": "Rational approximation with bounded denominator",
   "keywords": [ "math", "fraction", "rational", "approximation" ],

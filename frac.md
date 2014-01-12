@@ -94,7 +94,13 @@ Note that the variables are implicitly indexed at `k` (so `B` refers to `b_k`):
   var B = x * sgn;
   var P_2 = 0, P_1 = 1, P = 0;
   var Q_2 = 1, Q_1 = 0, Q = 0;
-  var A = B|0;
+```
+
+`A` should be the floor of `B`.  Originally the bit-or trick was used, but this is not correct
+for the range `B>=2**32`.
+
+```
+  var A = Math.floor(B);
 ```
 
 > Iterate
@@ -109,7 +115,7 @@ Note that the variables are implicitly indexed at `k` (so `B` refers to `b_k`):
 > a_k = [b_k], i.e., the greatest integer <= b_k
 
 ```
-    A = B|0;
+    A = Math.floor(B);
 ```
 
 > p_k = a_k p_{k-1} + p_{k-2}
@@ -167,7 +173,8 @@ var xltestfiles=[
   ['xl.00001.tsv', 10000],
   ['xl.0001.tsv',  10000],
   ['xl.001.tsv',   10000],
-  ['xl.01.tsv',    10000]
+  ['xl.01.tsv',    10000],
+  ['oddities.tsv', 25]
 ];
 
 function xlline(o,j,m,w) {
@@ -220,7 +227,7 @@ test:
 ```json>package.json
 {
   "name": "frac",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "SheetJS",
   "description": "Rational approximation with bounded denominator",
   "keywords": [ "math", "fraction", "rational", "approximation" ],
@@ -241,7 +248,7 @@ test:
 
 And to make sure that test files are not included in npm:
 ```>.npmignore
-./test_files
+test_files/*.tsv
 ```
 
 ```>.gitignore

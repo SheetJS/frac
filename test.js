@@ -5,7 +5,8 @@ var xltestfiles=[
   ['xl.00001.tsv', 10000],
   ['xl.0001.tsv',  10000],
   ['xl.001.tsv',   10000],
-  ['xl.01.tsv',    10000]
+  ['xl.01.tsv',    10000],
+  ['oddities.tsv', 25]
 ];
 
 function xlline(o,j,m,w) {
