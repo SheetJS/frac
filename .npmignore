@@ -1,1 +1,3 @@
 test_files/*.tsv
+.gitignore
+node_modules/

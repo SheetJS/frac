@@ -247,11 +247,16 @@ test:
 ```
 
 And to make sure that test files are not included in npm:
+
 ```>.npmignore
 test_files/*.tsv
+.gitignore
+node_modules/
 ```
+
+Don't include the node modules in git:
 
 ```>.gitignore
 .gitignore
-.npmignore
+node_modules/
 ```
