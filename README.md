@@ -5,10 +5,10 @@ Rational approximation to a floating point number with bounded denominator.
 Uses the Mediant Method <https://en.wikipedia.org/wiki/Mediant_(mathematics)>
 
 This module also provides an implementation of the continued fraction method as
-described by Aberth in "A method for exact computation with rational numbers", 
+described by Aberth in "A method for exact computation with rational numbers",
 which appears to be used by spreadsheet programs for displaying fractions
 
-## JS Installation and Usage
+## Setup
 
 In node:
 
@@ -17,6 +17,12 @@ In node:
 In the browser:
 
     <script src="frac.js"></script>
+
+The script will manipulate `module.exports` if available (e.g. in a CommonJS
+`require` context).  This is not always desirable.  To prevent the behavior,
+define `DO_NOT_EXPORT_FRAC`
+
+## Usage
 
 The exported `frac` function takes three arguments:
 
@@ -38,6 +44,10 @@ For example:
 `frac.cont` implements the Aberth algorithm (input and output specifications
 match the original `frac` function)
 
+## License
+
+Apache 2.0
+
 ## Tests
 
 Tests generated from Excel have 4 columns.  To produce a similar test:
@@ -49,7 +59,7 @@ Tests generated from Excel have 4 columns.  To produce a similar test:
 
 [![Build Status](https://travis-ci.org/SheetJS/frac.svg?branch=master)](https://travis-ci.org/SheetJS/frac)
 
-[![Coverage Status](https://coveralls.io/repos/SheetJS/frac/badge.png)](https://coveralls.io/r/SheetJS/frac)
+[![Coverage Status](https://coveralls.io/repos/SheetJS/frac/badge.png?branch=master)](https://coveralls.io/r/SheetJS/frac?branch=master)
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/731e31b3a26382ccd5d213b9e74ea552 "githalytics.com")](http://githalytics.com/SheetJS/frac)
 

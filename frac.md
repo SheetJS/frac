@@ -16,7 +16,7 @@ where `quotient == 0` for improper fractions. The interpretation is
 and `quotient <= x` for negative `x`.
 
 ```js>frac.js
-/* frac.js (C) 2013-2014 SheetJS -- http://sheetjs.com */
+/* frac.js (C) 2012-2014 SheetJS -- http://sheetjs.com */
 var frac = function(x, D, mixed) {
 ```
 
@@ -160,7 +160,7 @@ The final result is `r = (sgn x)p_k / q_k`:
 Finally we put some export jazz:
 
 ```
-if(typeof module !== 'undefined') module.exports = frac;
+if(typeof module !== 'undefined' && typeof DO_NOT_EXPORT_FRAC === 'undefined') module.exports = frac;
 ```
 
 # Tests
@@ -234,16 +234,20 @@ xltestfiles.forEach(function(x) {
 ```json>package.json
 {
   "name": "frac",
-  "version": "0.3.1-a",
+  "version": "1.0.0",
   "author": "SheetJS",
   "description": "Rational approximation with bounded denominator",
   "keywords": [ "math", "fraction", "rational", "approximation" ],
-  "main": "./frac.js",
-  "dependencies": {},
-  "devDependencies": {"mocha":"","voc":""},
-  "repository": { "type":"git", "url": "git://github.com/SheetJS/frac.git" },
+  "main": "frac.js",
+  "dependencies": {
+    "voc":""
+  },
+  "devDependencies": {
+    "mocha":""
+  },
+  "repository": { "type":"git", "url":"git://github.com/SheetJS/frac.git" },
   "scripts": {
-    "test": "make test"
+    "test": "mocha -R spec"
   },
   "config": {
     "blanket": {
@@ -251,6 +255,7 @@ xltestfiles.forEach(function(x) {
     }
   },
   "bugs": { "url": "https://github.com/SheetJS/frac/issues" },
+  "license": "Apache-2.0",
   "engines": { "node": ">=0.8" }
 }
 ```
