@@ -47,5 +47,9 @@ Tests generated from Excel have 4 columns.  To produce a similar test:
 - Column C format "Up to two digits (21/25)"
 - Column D format "Up to three digits (312/943)"
 
+[![Build Status](https://travis-ci.org/SheetJS/frac.svg?branch=master)](https://travis-ci.org/SheetJS/frac)
+
+[![Coverage Status](https://coveralls.io/repos/SheetJS/frac/badge.png)](https://coveralls.io/r/SheetJS/frac)
+
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/731e31b3a26382ccd5d213b9e74ea552 "githalytics.com")](http://githalytics.com/SheetJS/frac)
 

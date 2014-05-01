@@ -203,6 +203,24 @@ function parsexl(f,w) {
   var o = fs.readFileSync(f, 'utf-8').split("\n");
   for(var j = 0, m = o.length-3; j < m/w; ++j) xlline(o,j,m,w);
 }
+function cmp(a,b) { assert.equal(a.length,b.length); for(var i = 0; i != a.length; ++i) assert.equal(a[i], b[i]); }
+describe('mediant', function() {
+  it('should do the right thing for tenths', function() {
+    cmp(frac(0.1,9,false),[0,1,9]);
+    cmp(frac(0.2,9,false),[0,1,5]);
+    cmp(frac(0.3,9,false),[0,2,7]);
+    cmp(frac(0.4,9,false),[0,2,5]);
+    cmp(frac(0.5,9,false),[0,1,2]);
+    cmp(frac(0.6,9,false),[0,3,5]);
+    cmp(frac(0.7,9,false),[0,5,7]);
+    cmp(frac(0.8,9,false),[0,4,5]);
+    cmp(frac(0.9,9,false),[0,8,9]);
+    cmp(frac(1.0,9,false),[0,1,1]);
+    cmp(frac(1.0,9,true), [1,0,1]);
+    cmp(frac(1.7,9,true), [1,5,7]);
+    cmp(frac(1.7,9,false),[0,12,7]);
+  });
+});
 xltestfiles.forEach(function(x) {
   var f = './test_files/' + x[0];
   describe(x[0], function() {
@@ -211,35 +229,26 @@ xltestfiles.forEach(function(x) {
 });
 ```
 
-# Miscellany
-
-```make>Makefile
-frac.js: frac.md
-        voc frac.md
-
-.PHONY: test
-test:
-        mocha -R spec
-```
-
 ## Node Ilk
 
 ```json>package.json
 {
   "name": "frac",
-  "version": "0.3.1",
+  "version": "0.3.1-a",
   "author": "SheetJS",
   "description": "Rational approximation with bounded denominator",
   "keywords": [ "math", "fraction", "rational", "approximation" ],
   "main": "./frac.js",
   "dependencies": {},
   "devDependencies": {"mocha":"","voc":""},
-  "repository": {
-    "type":"git",
-    "url": "git://github.com/SheetJS/frac.git"
-  },
+  "repository": { "type":"git", "url": "git://github.com/SheetJS/frac.git" },
   "scripts": {
     "test": "make test"
+  },
+  "config": {
+    "blanket": {
+      "pattern": "frac.js"
+    }
   },
   "bugs": { "url": "https://github.com/SheetJS/frac/issues" },
   "engines": { "node": ">=0.8" }
@@ -252,6 +261,7 @@ And to make sure that test files are not included in npm:
 test_files/*.tsv
 .gitignore
 node_modules/
+coverage.html
 ```
 
 Don't include the node modules in git:
@@ -259,4 +269,5 @@ Don't include the node modules in git:
 ```>.gitignore
 .gitignore
 node_modules/
+coverage.html
 ```
