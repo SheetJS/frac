@@ -4,20 +4,26 @@ In all languages, the target is a function that takes 3 parameters:
 
  - `x` the number we wish to approximate
  - `D` the maximum denominator
- - `mixed` if true, return a mixed fraction (default); if false, improper
+ - `mixed` if true, return a mixed fraction; if false, improper
 
 The JS implementation walks through the algorithm.
 
 # JS Implementation
 
-In this version, the return value is `[quotient, numerator, denominator]`,
-where `quotient == 0` for improper fractions. The interpretation is
-`x ~ quotient + numerator / denominator` where `0 <= numerator < denominator`
-and `quotient <= x` for negative `x`.
+In this version, the return value is `[quotient, numerator, denominator]`.  The
+interpretation is `x ~ quotient + numerator / denominator`
 
-```js>frac.js
-/* frac.js (C) 2012-2014 SheetJS -- http://sheetjs.com */
-var frac = function(x, D, mixed) {
+- For improper fractions, `quotient == 0`.
+
+- For proper fractions, `0 <= numerator < denominator` and `quotient <= x`
+
+For negative `x`, this deviates from how some people and systems interpret mixed
+fractions.  Some interpret `a b/c` as `sgn(a) * [abs(a) + b/c]`.  To replicate
+that behavior, pass the absolute value to frac and prepend a "-" if negative.
+
+```js>frac.flow.js
+/* frac.js (C) 2012-2015 SheetJS -- http://sheetjs.com */
+var frac = function(x/*:number*/, D/*:number*/, mixed/*:?boolean*/)/*:Array<number>*/ {
 ```
 
 The goal is to maintain a feasible fraction (with bounded denominator) below
@@ -81,8 +87,8 @@ The continued fraction technique is employed by various spreadsheet programs.
 Note that this technique is inferior to the mediant method (at least, according
 to the desired goal of most accurately approximating the floating point number)
 
-```
-frac.cont = function cont(x, D, mixed) {
+```js>frac.flow.js
+frac.cont = function cont(x/*:number*/, D/*:number*/, mixed/*:?boolean*/)/*:Array<number>*/ {
 ```
 
 > Record the sign of x, take b0=|x|, p_{-2}=0, p_{-1}=1, q_{-2}=1, q_{-1}=0
@@ -160,6 +166,7 @@ The final result is `r = (sgn x)p_k / q_k`:
 Finally we put some export jazz:
 
 ```
+/*:: declare var DO_NOT_EXPORT_FRAC: any; */
 if(typeof module !== 'undefined' && typeof DO_NOT_EXPORT_FRAC === 'undefined') module.exports = frac;
 ```
 
@@ -234,7 +241,7 @@ xltestfiles.forEach(function(x) {
 ```json>package.json
 {
   "name": "frac",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "SheetJS",
   "description": "Rational approximation with bounded denominator",
   "keywords": [ "math", "fraction", "rational", "approximation" ],
@@ -267,6 +274,17 @@ test_files/*.tsv
 .gitignore
 node_modules/
 coverage.html
+.travis.yml
+.jshintrc
+.jscs.json
+.flowconfig
+misc/
+*.sheetjs
+*.pyc
+build/
+MANIFEST
+*.gz
+*.tgz
 ```
 
 Don't include the node modules in git:
@@ -275,4 +293,10 @@ Don't include the node modules in git:
 .gitignore
 node_modules/
 coverage.html
+*.sheetjs
+*.pyc
+build/
+MANIFEST
+*.gz
+*.tgz
 ```

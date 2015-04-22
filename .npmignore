@@ -2,3 +2,14 @@ test_files/*.tsv
 .gitignore
 node_modules/
 coverage.html
+.travis.yml
+.jshintrc
+.jscs.json
+.flowconfig
+misc/
+*.sheetjs
+*.pyc
+build/
+MANIFEST
+*.gz
+*.tgz

@@ -1,5 +1,5 @@
 /* frac.js (C) 2012-2015 SheetJS -- http://sheetjs.com */
-var frac = function(x, D, mixed) {
+var frac = function(x/*:number*/, D/*:number*/, mixed/*:?boolean*/)/*:Array<number>*/ {
   var n1 = Math.floor(x), d1 = 1;
   var n2 = n1+1, d2 = 1;
   if(x !== n1) while(d1 <= D && d2 <= D) {
@@ -18,7 +18,7 @@ var frac = function(x, D, mixed) {
   var q = Math.floor(n1/d1);
   return [q, n1 - q*d1, d1];
 };
-frac.cont = function cont(x, D, mixed) {
+frac.cont = function cont(x/*:number*/, D/*:number*/, mixed/*:?boolean*/)/*:Array<number>*/ {
   var sgn = x < 0 ? -1 : 1;
   var B = x * sgn;
   var P_2 = 0, P_1 = 1, P = 0;
@@ -39,4 +39,5 @@ frac.cont = function cont(x, D, mixed) {
   var q = Math.floor(sgn * P/Q);
   return [q, sgn*P - q*Q, Q];
 };
+/*:: declare var DO_NOT_EXPORT_FRAC: any; */
 if(typeof module !== 'undefined' && typeof DO_NOT_EXPORT_FRAC === 'undefined') module.exports = frac;

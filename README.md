@@ -2,15 +2,14 @@
 
 Rational approximation to a floating point number with bounded denominator.
 
-Uses the Mediant Method <https://en.wikipedia.org/wiki/Mediant_(mathematics)>
+Uses the [Mediant Method](https://en.wikipedia.org/wiki/Mediant_method).
 
 This module also provides an implementation of the continued fraction method as
-described by Aberth in "A method for exact computation with rational numbers",
-which appears to be used by spreadsheet programs for displaying fractions
+described by Aberth in "A method for exact computation with rational numbers".
 
-## Setup
+## Installation
 
-In node:
+With [npm](https://www.npmjs.org/package/frac):
 
     $ npm install frac
 
@@ -28,27 +27,28 @@ The exported `frac` function takes three arguments:
 
  - `x` the number we wish to approximate
  - `D` the maximum denominator
- - `mixed` if true, return a mixed fraction (default); if false, improper
+ - `mixed` if true, return a mixed fraction; if false, improper
 
 The return value is an array of the form `[quot, num, den]` where `quot==0`
-for improper fractions.
+for improper fractions.  `quot <= x` for mixed fractions, which may lead to some
+unexpected results when rendering negative numbers.
 
 For example:
 
 ```
 > // var frac = require('frac'); // uncomment this line if in node
-> frac(Math.PI,100) // [ 0, 22, 7 ]
-> frac(Math.PI,100,true) // [ 3, 1, 7 ]
+> frac(Math.PI,100); // [ 0, 22, 7 ]
+> frac(Math.PI,100,true); // [ 3, 1, 7 ]
+> frac(-Math.PI,100); // [ 0, -22, 7 ]
+> frac(-Math.PI,100,true); // [ -4, 6, 7 ] // the approximation is (-4) + (6/7)
 ```
 
 `frac.cont` implements the Aberth algorithm (input and output specifications
 match the original `frac` function)
 
-## License
+## Testing
 
-Apache 2.0
-
-## Tests
+`make test` will run the node-based tests.
 
 Tests generated from Excel have 4 columns.  To produce a similar test:
 
@@ -57,9 +57,15 @@ Tests generated from Excel have 4 columns.  To produce a similar test:
 - Column C format "Up to two digits (21/25)"
 - Column D format "Up to three digits (312/943)"
 
+## License
+
+Please consult the attached LICENSE file for details.  All rights not explicitly
+granted by the Apache 2.0 license are reserved by the Original Author.
+
+## Badges
+
 [![Build Status](https://travis-ci.org/SheetJS/frac.svg?branch=master)](https://travis-ci.org/SheetJS/frac)
 
-[![Coverage Status](https://coveralls.io/repos/SheetJS/frac/badge.png?branch=master)](https://coveralls.io/r/SheetJS/frac?branch=master)
+[![Coverage Status](http://img.shields.io/coveralls/SheetJS/frac/master.svg)](https://coveralls.io/r/SheetJS/frac?branch=master)
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/731e31b3a26382ccd5d213b9e74ea552 "githalytics.com")](http://githalytics.com/SheetJS/frac)
-

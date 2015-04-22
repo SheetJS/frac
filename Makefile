@@ -1,29 +1,74 @@
 LIB=frac
-TARGET=$(LIB).js
-.PHONY: frac
-frac: frac.md
-	voc frac.md
+REQS=
+ADDONS=
+AUXTARGETS=
 
-.PHONY: test
-test:
-	mocha -R spec
+ULIB=$(shell echo $(LIB) | tr a-z A-Z)
+DEPS=$(LIB).md
+TARGET=$(LIB).js
+
+.PHONY: all
+all: $(TARGET) $(AUXTARGETS)
+
+$(TARGET) $(AUXTARGETS): %.js : %.flow.js
+	node -e 'process.stdout.write(require("fs").readFileSync("$<","utf8").replace(/^\s*\/\*:[^*]*\*\/\s*(\n)?/gm,"").replace(/\/\*:[^*]*\*\//gm,""))' > $@
+
+$(LIB).flow.js: $(DEPS)
+	voc $^
+
+.PHONY: clean
+clean:
+	rm -f $(TARGET)
+
+
+.PHONY: test mocha
+test mocha: test.js
+	mocha -R spec -t 20000
 
 .PHONY: lint
-lint:
-	jshint --show-non-errors frac.js
+lint: $(TARGET) $(AUXTARGETS)
+	jshint --show-non-errors $(TARGET) $(AUXTARGETS)
+	jshint --show-non-errors package.json
+	jscs $(TARGET) $(AUXTARGETS)
 
-.PHONY: cov
-cov: coverage.html
+.PHONY: flow
+flow: lint
+	flow check --all --show-all-errors
 
-coverage.html: frac
-	mocha --require blanket -R html-cov > coverage.html
+.PHONY: cov cov-spin
+cov: misc/coverage.html
+cov-spin:
+	make cov & bash misc/spin.sh $$!
 
-.PHONY: coveralls
+misc/coverage.html: $(TARGET) test.js
+	mocha --require blanket -R html-cov -t 20000 > $@
+
+.PHONY: coveralls coveralls-spin
 coveralls:
-	mocha --require blanket --reporter mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js
+	mocha --require blanket --reporter mocha-lcov-reporter -t 20000 | ./node_modules/coveralls/bin/coveralls.js
+
+coveralls-spin:
+	make coveralls & bash misc/spin.sh $$!
 
 .PHONY: dist
-dist: $(TARGET)
+dist: dist-deps $(TARGET)
 	cp $(TARGET) dist/
 	cp LICENSE dist/
 	uglifyjs $(TARGET) -o dist/$(LIB).min.js --source-map dist/$(LIB).min.map --preamble "$$(head -n 1 frac.js)"
+	misc/strip_sourcemap.sh dist/$(LIB).min.js
+
+.PHONY: aux
+aux: $(AUXTARGETS)
+.PHONY: dist-deps
+dist-deps:
+
+## Python
+
+.PHONY: pylint
+pylint: frac.py
+	pep8 $^
+
+.PHONY: pypi
+pypi: frac.py
+	python setup.py sdist upload
+

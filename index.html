@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!-- frac.js (C) 2015 SheetJS http://sheetjs.com -->
+<!-- vim: set ts=2: -->
+<html>
+  <head>
+    <title>Fraction Live Demo</title>
+    <script src="frac.js"></script>
+  </head>
+  <body>
+    <b>Fraction Live Demo</b><br />
+    <a href="https://github.com/SheetJS/frac">Source Code</a><br />
+    <a href="https://github.com/SheetJS/frac/issues">Issues?  Something look weird?  Click here and report an issue</a><br />
+    <br />
+    <table>
+      <tr><td><b>Number:</b></td><td><input type="text" id="val" value="1.3"></td></tr>
+      <tr><td><b>Denominator Digits:</b></td><td><input type="text" id="fmt" value="1"></td></tr>
+      <tr><td><b>Use Mixed Fraction:</b></td><td><input type="checkbox" id="mix" name="mixd" checked></td></tr>
+      <tr><td colspan="2">&nbsp;</td></tr>
+      <tr><td><b>Mediant Fraction:</b></td><td><pre id="frm"></pre></td></tr>
+      <tr><td><b>Aberth Fraction:</b></td><td><pre id="fra"></pre></td></tr>
+    </table>
+  </body>
+  <script>
+    var V = document.getElementById('val');
+    var F = document.getElementById('fmt');
+    var X = document.getElementById('mix');
+    var M = document.getElementById('frm');
+    var A = document.getElementById('fra');
+
+    function update() {
+      var x, D, mixed, oM, oA;
+      x = Number(V.value);
+      D = Math.pow(10, Number(F.value))-1;
+      mixed = X.checked;
+      if(x !== x) { M.innerHTML=A.innerHTML = V.value + " not valid"; return; }
+      if(D !== D) { M.innerHTML=A.innerHTML = F.value + " not valid"; return; }
+      try {
+        oM = frac(x, D, mixed);
+        M.innerHTML = oM[0] + " " + oM[1] + "/" + oM[2];
+      } catch(e) { M.innerHTML = e.message; }
+      try {
+        oA = frac.cont(x, D, mixed);
+        A.innerHTML = oA[0] + " " + oA[1] + "/" + oA[2];
+      } catch(e) { A.innerHTML = e.message; }
+    }
+
+    /* Bind to relevant events */
+    if(F.addEventListener) {
+      F.addEventListener('keyup', update);
+      V.addEventListener('keyup', update);
+      M.addEventListener('change', update);
+      X.addEventListener('change', update);
+    } else if(F.attachEvent) {
+      F.attachEvent('onkeyup', update);
+      V.attachEvent('onkeyup', update);
+      M.attachEvent('onchange', update);
+      X.attachEvent('onchange', update);
+    } else {
+      F.oninput = update;
+      V.oninput = update;
+      M.onchange = update;
+      X.onchange = update;
+    }
+
+    update();
+  </script>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36810333-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</html>
+

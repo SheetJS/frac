@@ -1,4 +1,4 @@
-/* frac.js (C) 2012-2014 SheetJS -- http://sheetjs.com */
+/* frac.js (C) 2012-2015 SheetJS -- http://sheetjs.com */
 var frac = function(x, D, mixed) {
   var n1 = Math.floor(x), d1 = 1;
   var n2 = n1+1, d2 = 1;
