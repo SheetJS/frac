@@ -33,8 +33,7 @@ frac.cont = function cont(x, D, mixed) {
     P_2 = P_1; P_1 = P;
     Q_2 = Q_1; Q_1 = Q;
   }
-  if(Q > D) { Q = Q_1; P = P_1; }
-  if(Q > D) { Q = Q_2; P = P_2; }
+  if(Q > D) { if(Q_1 > D) { Q = Q_2; P = P_2; } else { Q = Q_1; P = P_1; } }
   if(!mixed) return [0, sgn * P, Q];
   var q = Math.floor(sgn * P/Q);
   return [q, sgn*P - q*Q, Q];

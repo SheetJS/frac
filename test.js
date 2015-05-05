@@ -10,7 +10,7 @@ var xltestfiles=[
 ];
 
 function xlline(o,j,m,w) {
-  it(j, function(done) {
+  it(j, function() {
     var d, q, qq;
     for(var i = j*w; i < m-3 && i < (j+1)*w; ++i) {
       d = o[i].split("\t");
@@ -27,7 +27,6 @@ function xlline(o,j,m,w) {
       qq = (q[0]||q[1]) ? (q[0] || "") + " " + (q[1] ? (q[1] < 100 ? " " : "") + (q[1] < 10 ? " " : "") + q[1] + "/" + q[2] + (q[2]<10?" ":"") + (q[2]<100?" ":""): "       ") : "0        ";
       assert.equal(qq, d[3], d[3] + " 3");
     }
-    done();
   });
 }
 function parsexl(f,w) {

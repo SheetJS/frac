@@ -147,11 +147,10 @@ At the end of each iteration, advance `k` by one step:
   }
 ```
 
-In case we end up overstepping, walk back an iteration or two:
+In case we end up overstepping, walk back to the last valid iteration:
 
 ```
-  if(Q > D) { Q = Q_1; P = P_1; }
-  if(Q > D) { Q = Q_2; P = P_2; }
+  if(Q > D) { if(Q_1 > D) { Q = Q_2; P = P_2; } else { Q = Q_1; P = P_1; } }
 ```
 
 The final result is `r = (sgn x)p_k / q_k`:
@@ -185,7 +184,7 @@ var xltestfiles=[
 ];
 
 function xlline(o,j,m,w) {
-  it(j, function(done) {
+  it(j, function() {
     var d, q, qq;
     for(var i = j*w; i < m-3 && i < (j+1)*w; ++i) {
       d = o[i].split("\t");
@@ -202,7 +201,6 @@ function xlline(o,j,m,w) {
       qq = (q[0]||q[1]) ? (q[0] || "") + " " + (q[1] ? (q[1] < 100 ? " " : "") + (q[1] < 10 ? " " : "") + q[1] + "/" + q[2] + (q[2]<10?" ":"") + (q[2]<100?" ":""): "       ") : "0        ";
       assert.equal(qq, d[3], d[3] + " 3");
     }
-    done();
   });
 }
 function parsexl(f,w) {
@@ -241,7 +239,7 @@ xltestfiles.forEach(function(x) {
 ```json>package.json
 {
   "name": "frac",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "SheetJS",
   "description": "Rational approximation with bounded denominator",
   "keywords": [ "math", "fraction", "rational", "approximation" ],

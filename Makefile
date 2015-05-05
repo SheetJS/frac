@@ -65,10 +65,16 @@ dist-deps:
 ## Python
 
 .PHONY: pylint
-pylint: frac.py
+pylint: frac.py $(wildcard test_*.py)
 	pep8 $^
 
 .PHONY: pypi
 pypi: frac.py
 	python setup.py sdist upload
 
+.PHONY: pytest pypytest
+pytest: pylint
+	py.test -v --durations=5
+
+pypytest: pylint
+	pypy $$(which py.test) -v --durations=5

@@ -9,6 +9,8 @@ described by Aberth in "A method for exact computation with rational numbers".
 
 ## Installation
 
+### JS
+
 With [npm](https://www.npmjs.org/package/frac):
 
     $ npm install frac
@@ -21,9 +23,15 @@ The script will manipulate `module.exports` if available (e.g. in a CommonJS
 `require` context).  This is not always desirable.  To prevent the behavior,
 define `DO_NOT_EXPORT_FRAC`
 
+### Python
+
+From [PyPI](https://pypi.python.org/pypi/frac):
+
+    $ pip install frac
+
 ## Usage
 
-The exported `frac` function takes three arguments:
+In all cases, the relevant function takes 3 arguments:
 
  - `x` the number we wish to approximate
  - `D` the maximum denominator
@@ -33,18 +41,48 @@ The return value is an array of the form `[quot, num, den]` where `quot==0`
 for improper fractions.  `quot <= x` for mixed fractions, which may lead to some
 unexpected results when rendering negative numbers.
 
+### JS
+
+The exported `frac` function implements the Mediant method.
+
+`frac.cont` implements the Aberth algorithm
+
 For example:
 
-```
+```js
 > // var frac = require('frac'); // uncomment this line if in node
-> frac(Math.PI,100); // [ 0, 22, 7 ]
-> frac(Math.PI,100,true); // [ 3, 1, 7 ]
-> frac(-Math.PI,100); // [ 0, -22, 7 ]
-> frac(-Math.PI,100,true); // [ -4, 6, 7 ] // the approximation is (-4) + (6/7)
+> frac(1.3, 9);              // [  0,  9, 7 ] //  1.3 ~       9/7
+> frac(1.3, 9, true);        // [  1,  2, 7 ] //  1.3 ~  1 +  2/7
+> frac(-1.3, 9);             // [  0, -9, 7 ] // -1.3 ~      -9/7
+> frac(-1.3, 9, true);       // [ -2,  5, 7 ] // -1.3 ~ -2 +  5/7
+
+> frac.cont(1.3, 9);         // [  0,  4, 3 ] //  1.3 ~       4/3
+> frac.cont(1.3, 9, true);   // [  1,  1, 3 ] //  1.3 ~  1 +  1/3
+> frac.cont(-1.3, 9);        // [  0, -4, 3 ] // -1.3 ~      -4/3
+> frac.cont(-1.3, 9, true);  // [ -2,  2, 3 ] // -1.3 ~ -2 +  2/3
 ```
 
-`frac.cont` implements the Aberth algorithm (input and output specifications
-match the original `frac` function)
+
+### Python
+
+`frac.med` implements Mediant method.
+
+`frac.cont` implements Aberth algorithm
+
+For example:
+
+```py
+>>> import frac
+>>> frac.med(1.3, 9)         # [  0,  9, 7 ]
+>>> frac.med(1.3, 9, True)   # [  1,  2, 7 ]
+>>> frac.med(-1.3, 9)        # [  0, -9, 7 ]
+>>> frac.med(-1.3, 9, True)  # [ -2,  5, 7 ]
+
+>>> frac.cont(1.3, 9)        # [  0,  4, 3 ]
+>>> frac.cont(1.3, 9, True)  # [  1,  1, 3 ]
+>>> frac.cont(-1.3, 9)       # [  0, -4, 3 ]
+>>> frac.cont(-1.3, 9, True) # [ -2,  2, 3 ]
+```
 
 ## Testing
 
@@ -68,4 +106,4 @@ granted by the Apache 2.0 license are reserved by the Original Author.
 
 [![Coverage Status](http://img.shields.io/coveralls/SheetJS/frac/master.svg)](https://coveralls.io/r/SheetJS/frac?branch=master)
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/731e31b3a26382ccd5d213b9e74ea552 "githalytics.com")](http://githalytics.com/SheetJS/frac)
+[![Analytics](https://ga-beacon.appspot.com/UA-36810333-1/SheetJS/frac?pixel)](https://github.com/SheetJS/frac)

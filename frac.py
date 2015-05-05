@@ -16,18 +16,16 @@ All functions take 3 arguments:
 The return value is a list of 3 elements: [quotient, numerator, denominator]
 """
 
-import math as Math
-
 
 def med(x, D, mixed=False):
     """Generate fraction representation using Mediant method"""
-    n1, d1 = int(Math.floor(x)), 1
+    n1, d1 = int(x), 1
     n2, d2 = n1+1, 1
     m = 0.
     if x != n1:
         while d1 <= D and d2 <= D:
             m = float(n1 + n2) / (d1 + d2)
-            if(x == m):
+            if x == m:
                 if d1 + d2 <= D:
                     n1, d1 = n1 + n2, d1 + d2
                     d2 = D + 1
@@ -50,23 +48,24 @@ def med(x, D, mixed=False):
 
 def cont(x, D, mixed=False):
     """Generate fraction representation using Aberth method"""
-    sgn = -1 if x < 0 else 1
     B = abs(x)
-    P_2, P_1, P = 0, 1, 0
-    Q_2, Q_1, Q = 1, 0, 0
+    I = int
+    P_2, P_1, P, Q_2, Q_1, Q = 0, 1, 0, 1, 0, 0
     while Q_1 < D:
-        A = int(Math.floor(B))
+        A = I(B)
         P = A * P_1 + P_2
         Q = A * Q_1 + Q_2
-        if ((B - A) < 0.0000000005):
+        if (B - A) < 0.0000000005:
             break
         B = 1. / (B-A)
         P_2, P_1 = P_1, P
         Q_2, Q_1 = Q_1, Q
-    if(Q > D):
-        P, Q = P_1, Q_1
-    if(Q > D):
-        P, Q = P_2, Q_2
+    if Q > D:
+        if Q_1 <= D:
+            P, Q = P_1, Q_1
+        else:
+            P, Q = P_2, Q_2
+    sgn = -1 if x < 0 else 1
     if not mixed:
         return [0, sgn * P, Q]
     q = divmod(sgn * P, Q)

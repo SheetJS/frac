@@ -1,7 +1,7 @@
 from distutils.core import setup
 setup(
 	name='frac',
-	version='0.0.1',
+	version='1.0.2',
 	author='SheetJS',
 	author_email='dev@sheetjs.com',
 	url='http://oss.sheetjs.com/frac',
@@ -20,9 +20,10 @@ This module can generate fraction representations using:
 	license = "Apache-2.0",
 	keywords = ['frac', 'fraction', 'rational', 'approximation'],
 	classifiers = [
-		'Development Status :: 3 - Alpha',
+		'Development Status :: 5 - Production/Stable'
 		'License :: OSI Approved :: Apache Software License',
-		'Topic :: Office/Business',
+		'Operating System :: OS Independent',
+		'Topic :: Scientific/Engineering :: Mathematics',
 		'Topic :: Utilities',
 	]
 )
