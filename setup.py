@@ -20,7 +20,7 @@ This module can generate fraction representations using:
 	license = "Apache-2.0",
 	keywords = ['frac', 'fraction', 'rational', 'approximation'],
 	classifiers = [
-		'Development Status :: 5 - Production/Stable'
+		'Development Status :: 5 - Production/Stable',
 		'License :: OSI Approved :: Apache Software License',
 		'Operating System :: OS Independent',
 		'Topic :: Scientific/Engineering :: Mathematics',
