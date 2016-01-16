@@ -22,7 +22,7 @@ fractions.  Some interpret `a b/c` as `sgn(a) * [abs(a) + b/c]`.  To replicate
 that behavior, pass the absolute value to frac and prepend a "-" if negative.
 
 ```js>frac.flow.js
-/* frac.js (C) 2012-2015 SheetJS -- http://sheetjs.com */
+/* frac.js (C) 2012-present SheetJS -- http://sheetjs.com */
 var frac = function(x/*:number*/, D/*:number*/, mixed/*:?boolean*/)/*:Array<number>*/ {
 ```
 
@@ -135,7 +135,7 @@ for the range `B>=2**32`.
 > b_{k+1} = (b_{k} - a_{k})^{-1}
 
 ```
-    if((B - A) < 0.0000000005) break;
+    if((B - A) < 0.000000005) break;
 ```
 
 At the end of each iteration, advance `k` by one step:
@@ -239,7 +239,7 @@ xltestfiles.forEach(function(x) {
 ```json>package.json
 {
   "name": "frac",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "author": "SheetJS",
   "description": "Rational approximation with bounded denominator",
   "keywords": [ "math", "fraction", "rational", "approximation" ],

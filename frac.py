@@ -1,4 +1,4 @@
-# frac.py (C) 2015 SheetJS -- http://sheetjs.com
+# frac.py (C) 2015-present SheetJS -- http://sheetjs.com
 # vim: set fileencoding=utf-8 :
 """
 Rational approximations to numbers
