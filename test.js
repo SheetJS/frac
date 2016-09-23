@@ -10,21 +10,25 @@ var xltestfiles=[
 ];
 
 function xlline(o,j,m,w) {
-  it(j, function() {
-    var d, q, qq;
+  it(j.toString(), function() {
+    var d, q, qq, f = 0.1;
+    var q0 = 0, q1 = 0, q2 = 0
     for(var i = j*w; i < m-3 && i < (j+1)*w; ++i) {
       d = o[i].split("\t");
+      if(d.length < 3) continue;
+      f = parseFloat(d[0]);
 
-      q = frac.cont(Number(d[0]), 9, true);
-      qq = (q[0]||q[1]) ? (q[0] || "") + " " + (q[1] ? q[1] + "/" + q[2] : "   ") : "0    ";
+      q = frac.cont(f, 9, true);
+      q0 = q[0]; q1 = q[1]; q2 = q[2];
+      qq = (q0!=0||q1!=0) ? (q0!=0 ? q0.toString() : "") + " " + (q1!=0 ? q1.toString() + "/" + q2.toString() : "   ") : "0    ";
       assert.equal(qq, d[1], d[1] + " 1");
 
-      q = frac.cont(Number(d[0]), 99, true);
-      qq = (q[0]||q[1]) ? (q[0] || "") + " " + (q[1] ? (q[1] < 10 ? " " : "") + q[1] + "/" + q[2] + (q[2]<10?" ":"") : "     ") : "0      ";
+      q = frac.cont(f, 99, true);
+      qq = (q[0]!=0||q[1]!=0) ? (q[0]!=0 ? q[0].toString() : "") + " " + (q[1]!=0 ? (q[1] < 10 ? " " : "") + q[1].toString() + "/" + q[2].toString() + (q[2]<10?" ":"") : "     ") : "0      ";
       assert.equal(qq, d[2], d[2] + " 2");
 
-      q = frac.cont(Number(d[0]), 999, true);
-      qq = (q[0]||q[1]) ? (q[0] || "") + " " + (q[1] ? (q[1] < 100 ? " " : "") + (q[1] < 10 ? " " : "") + q[1] + "/" + q[2] + (q[2]<10?" ":"") + (q[2]<100?" ":""): "       ") : "0        ";
+      q = frac.cont(f, 999, true);
+      qq = (q[0]!=0||q[1]!=0) ? (q[0]!=0 ? q[0].toString() : "") + " " + (q[1]!=0 ? (q[1] < 100 ? " " : "") + (q[1] < 10 ? " " : "") + q[1].toString() + "/" + q[2].toString() + (q[2]<10?" ":"") + (q[2]<100?" ":""): "       ") : "0        ";
       assert.equal(qq, d[3], d[3] + " 3");
     }
   });

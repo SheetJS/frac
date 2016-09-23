@@ -1,5 +1,5 @@
 /* frac.js (C) 2012-present SheetJS -- http://sheetjs.com */
-var frac = function(x/*:number*/, D/*:number*/, mixed/*:?boolean*/)/*:Array<number>*/ {
+var frac = function frac(x/*:number*/, D/*:number*/, mixed/*:?boolean*/)/*:Array<number>*/ {
   var n1 = Math.floor(x), d1 = 1;
   var n2 = n1+1, d2 = 1;
   if(x !== n1) while(d1 <= D && d2 <= D) {
@@ -28,7 +28,7 @@ frac.cont = function cont(x/*:number*/, D/*:number*/, mixed/*:?boolean*/)/*:Arra
     A = Math.floor(B);
     P = A * P_1 + P_2;
     Q = A * Q_1 + Q_2;
-    if((B - A) < 0.000000005) break;
+    if((B - A) < 0.00000005) break;
     B = 1 / (B - A);
     P_2 = P_1; P_1 = P;
     Q_2 = Q_1; Q_1 = Q;

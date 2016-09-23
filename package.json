@@ -1,6 +1,6 @@
 {
   "name": "frac",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "SheetJS",
   "description": "Rational approximation with bounded denominator",
   "keywords": [ "math", "fraction", "rational", "approximation" ],
@@ -13,7 +13,7 @@
   },
   "repository": { "type":"git", "url":"git://github.com/SheetJS/frac.git" },
   "scripts": {
-    "test": "mocha -R spec"
+    "test": "make test"
   },
   "config": {
     "blanket": {

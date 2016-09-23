@@ -55,7 +55,7 @@ def cont(x, D, mixed=False):
         A = I(B)
         P = A * P_1 + P_2
         Q = A * Q_1 + Q_2
-        if (B - A) < 0.0000000005:
+        if (B - A) < 0.00000005:
             break
         B = 1. / (B-A)
         P_2, P_1 = P_1, P

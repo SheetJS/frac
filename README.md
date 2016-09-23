@@ -7,17 +7,22 @@ Uses the [Mediant Method](https://en.wikipedia.org/wiki/Mediant_method).
 This module also provides an implementation of the continued fraction method as
 described by Aberth in "A method for exact computation with rational numbers".
 
+
 ## Installation
 
 ### JS
 
 With [npm](https://www.npmjs.org/package/frac):
 
-    $ npm install frac
+```bash
+$ npm install frac
+```
 
 In the browser:
 
-    <script src="frac.js"></script>
+```html
+<script src="frac.js"></script>
+```
 
 The script will manipulate `module.exports` if available (e.g. in a CommonJS
 `require` context).  This is not always desirable.  To prevent the behavior,
@@ -27,7 +32,9 @@ define `DO_NOT_EXPORT_FRAC`
 
 From [PyPI](https://pypi.python.org/pypi/frac):
 
-    $ pip install frac
+```bash
+$ pip install frac
+```
 
 ## Usage
 
@@ -67,33 +74,37 @@ For example:
 
 `frac.med` implements Mediant method.
 
-`frac.cont` implements Aberth algorithm
+`frac.cont` implements Aberth algorithm.
 
 For example:
 
 ```py
 >>> import frac
->>> frac.med(1.3, 9)         # [  0,  9, 7 ]
->>> frac.med(1.3, 9, True)   # [  1,  2, 7 ]
->>> frac.med(-1.3, 9)        # [  0, -9, 7 ]
->>> frac.med(-1.3, 9, True)  # [ -2,  5, 7 ]
+>>> frac.med(1.3, 9)         ## [  0,  9, 7 ] ##  1.3 ~       9/7
+>>> frac.med(1.3, 9, True)   ## [  1,  2, 7 ] ##  1.3 ~  1 +  2/7
+>>> frac.med(-1.3, 9)        ## [  0, -9, 7 ] ## -1.3 ~      -9/7
+>>> frac.med(-1.3, 9, True)  ## [ -2,  5, 7 ] ## -1.3 ~ -2 +  5/7
 
->>> frac.cont(1.3, 9)        # [  0,  4, 3 ]
->>> frac.cont(1.3, 9, True)  # [  1,  1, 3 ]
->>> frac.cont(-1.3, 9)       # [  0, -4, 3 ]
->>> frac.cont(-1.3, 9, True) # [ -2,  2, 3 ]
+>>> frac.cont(1.3, 9)        ## [  0,  4, 3 ] ##  1.3 ~       4/3
+>>> frac.cont(1.3, 9, True)  ## [  1,  1, 3 ] ##  1.3 ~  1 +  1/3
+>>> frac.cont(-1.3, 9)       ## [  0, -4, 3 ] ## -1.3 ~      -4/3
+>>> frac.cont(-1.3, 9, True) ## [ -2,  2, 3 ] ## -1.3 ~ -2 +  2/3
 ```
 
 ## Testing
 
-`make test` will run the node-based tests.
-
-Tests generated from Excel have 4 columns.  To produce a similar test:
+The test TSV baselines in the `test_files` directory have four columns:
 
 - Column A contains the raw values
-- Column B format "Up to one digit (1/4)"
-- Column C format "Up to two digits (21/25)"
-- Column D format "Up to three digits (312/943)"
+- Column B format "Up to one digit (1/4)" (`denominator = 9`)
+- Column C format "Up to two digits (21/25)" (`denominator = 99`)
+- Column D format "Up to three digits (312/943)" (`denominator = 999`)
+
+`make test` will run the node-based tests.
+
+`make pytest` will run the python tests against the system Python version.
+
+`make pypytest` will run the python tests against `pypy` if installed
 
 ## License
 

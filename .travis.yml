@@ -1,13 +1,14 @@
 language: node_js
 node_js:
-  - "5.0"
+  - "6"
+  - "5"
   - "4.2"
   - "0.12"
   - "0.10"
   - "0.8"
 before_install:
   - "npm install -g npm@next"
-  - "npm install -g mocha"
+  - "npm install -g mocha voc"
   - "npm install blanket"
   - "npm install coveralls mocha-lcov-reporter"
 after_success:

@@ -23,7 +23,7 @@ that behavior, pass the absolute value to frac and prepend a "-" if negative.
 
 ```js>frac.flow.js
 /* frac.js (C) 2012-present SheetJS -- http://sheetjs.com */
-var frac = function(x/*:number*/, D/*:number*/, mixed/*:?boolean*/)/*:Array<number>*/ {
+var frac = function frac(x/*:number*/, D/*:number*/, mixed/*:?boolean*/)/*:Array<number>*/ {
 ```
 
 The goal is to maintain a feasible fraction (with bounded denominator) below
@@ -91,7 +91,7 @@ to the desired goal of most accurately approximating the floating point number)
 frac.cont = function cont(x/*:number*/, D/*:number*/, mixed/*:?boolean*/)/*:Array<number>*/ {
 ```
 
-> Record the sign of x, take b0=|x|, p_{-2}=0, p_{-1}=1, q_{-2}=1, q_{-1}=0
+> Record the sign of x, take `b0=|x|, p_{-2}=0, p_{-1}=1, q_{-2}=1, q_{-1}=0`
 
 Note that the variables are implicitly indexed at `k` (so `B` refers to `b_k`):
 
@@ -102,8 +102,8 @@ Note that the variables are implicitly indexed at `k` (so `B` refers to `b_k`):
   var Q_2 = 1, Q_1 = 0, Q = 0;
 ```
 
-`A` should be the floor of `B`.  Originally the bit-or trick was used, but this is not correct
-for the range `B>=2**32`.
+`A` should be the floor of `B`.  Originally the bit-or trick was used, but this
+is not correct for the range `B>=2**32`.
 
 ```
   var A = Math.floor(B);
@@ -111,31 +111,31 @@ for the range `B>=2**32`.
 
 > Iterate
 
-> ... for k = 0,1,...,K, where K is the first instance of k where
-> either q_{k+1} > Q or b_{k+1} is undefined (b_k = a_k).
+> ... for `k = 0,1,...,K`, where `K` is the first instance of `k` where
+> either `q_{k+1} > Q` or `b_{k+1}` is undefined (`b_k = a_k`).
 
 ```
   while(Q_1 < D) {
 ```
 
-> a_k = [b_k], i.e., the greatest integer <= b_k
+> `a_k = [b_k]`, i.e., the greatest integer `<= b_k`
 
 ```
     A = Math.floor(B);
 ```
 
-> p_k = a_k p_{k-1} + p_{k-2}
-> q_k = a_k q_{k-1} + q_{k-2}
+> `p_k = a_k p_{k-1} + p_{k-2}`
+> `q_k = a_k q_{k-1} + q_{k-2}`
 
 ```
     P = A * P_1 + P_2;
     Q = A * Q_1 + Q_2;
 ```
 
-> b_{k+1} = (b_{k} - a_{k})^{-1}
+> `b_{k+1} = (b_{k} - a_{k})^{-1}`
 
 ```
-    if((B - A) < 0.000000005) break;
+    if((B - A) < 0.00000005) break;
 ```
 
 At the end of each iteration, advance `k` by one step:
@@ -184,21 +184,25 @@ var xltestfiles=[
 ];
 
 function xlline(o,j,m,w) {
-  it(j, function() {
-    var d, q, qq;
+  it(j.toString(), function() {
+    var d, q, qq, f = 0.1;
+    var q0 = 0, q1 = 0, q2 = 0
     for(var i = j*w; i < m-3 && i < (j+1)*w; ++i) {
       d = o[i].split("\t");
+      if(d.length < 3) continue;
+      f = parseFloat(d[0]);
 
-      q = frac.cont(Number(d[0]), 9, true);
-      qq = (q[0]||q[1]) ? (q[0] || "") + " " + (q[1] ? q[1] + "/" + q[2] : "   ") : "0    ";
+      q = frac.cont(f, 9, true);
+      q0 = q[0]; q1 = q[1]; q2 = q[2];
+      qq = (q0!=0||q1!=0) ? (q0!=0 ? q0.toString() : "") + " " + (q1!=0 ? q1.toString() + "/" + q2.toString() : "   ") : "0    ";
       assert.equal(qq, d[1], d[1] + " 1");
 
-      q = frac.cont(Number(d[0]), 99, true);
-      qq = (q[0]||q[1]) ? (q[0] || "") + " " + (q[1] ? (q[1] < 10 ? " " : "") + q[1] + "/" + q[2] + (q[2]<10?" ":"") : "     ") : "0      ";
+      q = frac.cont(f, 99, true);
+      qq = (q[0]!=0||q[1]!=0) ? (q[0]!=0 ? q[0].toString() : "") + " " + (q[1]!=0 ? (q[1] < 10 ? " " : "") + q[1].toString() + "/" + q[2].toString() + (q[2]<10?" ":"") : "     ") : "0      ";
       assert.equal(qq, d[2], d[2] + " 2");
 
-      q = frac.cont(Number(d[0]), 999, true);
-      qq = (q[0]||q[1]) ? (q[0] || "") + " " + (q[1] ? (q[1] < 100 ? " " : "") + (q[1] < 10 ? " " : "") + q[1] + "/" + q[2] + (q[2]<10?" ":"") + (q[2]<100?" ":""): "       ") : "0        ";
+      q = frac.cont(f, 999, true);
+      qq = (q[0]!=0||q[1]!=0) ? (q[0]!=0 ? q[0].toString() : "") + " " + (q[1]!=0 ? (q[1] < 100 ? " " : "") + (q[1] < 10 ? " " : "") + q[1].toString() + "/" + q[2].toString() + (q[2]<10?" ":"") + (q[2]<100?" ":""): "       ") : "0        ";
       assert.equal(qq, d[3], d[3] + " 3");
     }
   });
@@ -239,7 +243,7 @@ xltestfiles.forEach(function(x) {
 ```json>package.json
 {
   "name": "frac",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "SheetJS",
   "description": "Rational approximation with bounded denominator",
   "keywords": [ "math", "fraction", "rational", "approximation" ],
@@ -252,7 +256,7 @@ xltestfiles.forEach(function(x) {
   },
   "repository": { "type":"git", "url":"git://github.com/SheetJS/frac.git" },
   "scripts": {
-    "test": "mocha -R spec"
+    "test": "make test"
   },
   "config": {
     "blanket": {
