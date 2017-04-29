@@ -1,5 +1,9 @@
 test_files/*.tsv
+ctest/
+test.js
+Makefile
 .gitignore
+.npmignore
 node_modules/
 coverage.html
 .travis.yml
@@ -13,3 +17,5 @@ build/
 MANIFEST
 *.gz
 *.tgz
+*.py
+*.html

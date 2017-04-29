@@ -1,6 +1,8 @@
 [ignore]
 .*/node_modules/.*
 .*/dist/.*
+.*/ctest/mocha.js
+.*/ctest/sauce.*
 .*/test.js
 .*/frac.js
 

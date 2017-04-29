@@ -6,7 +6,8 @@ Uses the [Mediant Method](https://en.wikipedia.org/wiki/Mediant_method).
 
 This module also provides an implementation of the continued fraction method as
 described by Aberth in "A method for exact computation with rational numbers".
-
+The algorithm is used in <a href="http://sheetjs.com">SheetJS Libraries</a> to
+replicate fraction formats.
 
 ## Installation
 
@@ -109,12 +110,20 @@ The test TSV baselines in the `test_files` directory have four columns:
 ## License
 
 Please consult the attached LICENSE file for details.  All rights not explicitly
-granted by the Apache 2.0 license are reserved by the Original Author.
+granted by the Apache 2.0 License are reserved by the Original Author.
 
 ## Badges
+
+[![Build Status](https://saucelabs.com/browser-matrix/frac.svg)](https://saucelabs.com/u/frac)
 
 [![Build Status](https://travis-ci.org/SheetJS/frac.svg?branch=master)](https://travis-ci.org/SheetJS/frac)
 
 [![Coverage Status](http://img.shields.io/coveralls/SheetJS/frac/master.svg)](https://coveralls.io/r/SheetJS/frac?branch=master)
+
+[![NPM Downloads](https://img.shields.io/npm/dt/frac.svg)](https://npmjs.org/package/frac)
+
+[![Dependencies Status](https://david-dm.org/sheetjs/frac/status.svg)](https://david-dm.org/sheetjs/frac)
+
+[![ghit.me](https://ghit.me/badge.svg?repo=sheetjs/js-xlsx)](https://ghit.me/repo/sheetjs/js-xlsx)
 
 [![Analytics](https://ga-beacon.appspot.com/UA-36810333-1/SheetJS/frac?pixel)](https://github.com/SheetJS/frac)
