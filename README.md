@@ -112,9 +112,13 @@ The test TSV baselines in the `test_files` directory have four columns:
 Please consult the attached LICENSE file for details.  All rights not explicitly
 granted by the Apache 2.0 License are reserved by the Original Author.
 
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FSheetJS%2Ffrac.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FSheetJS%2Ffrac?ref=badge_large)
+
 ## Badges
 
 [![Build Status](https://saucelabs.com/browser-matrix/frac.svg)](https://saucelabs.com/u/frac)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FSheetJS%2Ffrac.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FSheetJS%2Ffrac?ref=badge_shield)
 
 [![Build Status](https://travis-ci.org/SheetJS/frac.svg?branch=master)](https://travis-ci.org/SheetJS/frac)
 
