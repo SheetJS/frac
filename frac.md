@@ -243,16 +243,16 @@ xltestfiles.forEach(function(x) {
 ```json>package.json
 {
   "name": "frac",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "author": "SheetJS",
   "description": "Rational approximation with bounded denominator",
   "keywords": [ "math", "fraction", "rational", "approximation" ],
   "main": "frac.js",
   "dependencies": {
-    "voc":""
+    "voc":"~1.0.0"
   },
   "devDependencies": {
-    "mocha":""
+    "mocha":"~2.5.3"
   },
   "repository": { "type":"git", "url":"git://github.com/SheetJS/frac.git" },
   "scripts": {
@@ -263,6 +263,7 @@ xltestfiles.forEach(function(x) {
       "pattern": "frac.js"
     }
   },
+  "homepage": "http://oss.sheetjs.com/frac",
   "bugs": { "url": "https://github.com/SheetJS/frac/issues" },
   "license": "Apache-2.0",
   "engines": { "node": ">=0.8" }
@@ -273,7 +274,11 @@ And to make sure that test files are not included in npm:
 
 ```>.npmignore
 test_files/*.tsv
+ctest/
+test.js
+Makefile
 .gitignore
+.npmignore
 node_modules/
 coverage.html
 .travis.yml
@@ -287,6 +292,8 @@ build/
 MANIFEST
 *.gz
 *.tgz
+*.py
+*.html
 ```
 
 Don't include the node modules in git:
