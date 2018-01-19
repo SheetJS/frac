@@ -27,6 +27,8 @@ a { text-decoration: none }
 <script src="frac.js"></script>
 <script>
 /*jshint browser:true */
+/* eslint-env browser */
+/* eslint no-use-before-define:0 */
 /*global frac */
 var V = document.getElementById('val');
 var F = document.getElementById('fmt');
@@ -70,8 +72,6 @@ if(F.addEventListener) {
 }
 
 update();
-</script>
-<script type="text/javascript">
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', 'UA-36810333-1']);
 	_gaq.push(['_trackPageview']);

@@ -13,7 +13,7 @@ replicate fraction formats.
 
 ### JS
 
-With [npm](https://www.npmjs.org/package/frac):
+With [`npm`](https://www.npmjs.org/package/frac):
 
 ```bash
 $ npm install frac
@@ -25,13 +25,12 @@ In the browser:
 <script src="frac.js"></script>
 ```
 
-The script will manipulate `module.exports` if available (e.g. in a CommonJS
-`require` context).  This is not always desirable.  To prevent the behavior,
-define `DO_NOT_EXPORT_FRAC`
+The script will manipulate `module.exports` if available .  This is not always
+desirable.  To prevent the behavior, define `DO_NOT_EXPORT_FRAC`
 
 ### Python
 
-From [PyPI](https://pypi.python.org/pypi/frac):
+From [`PyPI`](https://pypi.python.org/pypi/frac):
 
 ```bash
 $ pip install frac

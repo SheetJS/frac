@@ -38,4 +38,5 @@ frac.cont = function cont(x, D, mixed) {
   var q = Math.floor(sgn * P/Q);
   return [q, sgn*P - q*Q, Q];
 };
+// eslint-disable-next-line no-undef
 if(typeof module !== 'undefined' && typeof DO_NOT_EXPORT_FRAC === 'undefined') module.exports = frac;

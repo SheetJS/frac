@@ -43,7 +43,7 @@ our target:
   if(x !== n1) while(d1 <= D && d2 <= D) {
 ```
 
-The mediant is the sum of the numerators divided by the sum of demoninators:
+The mediant is the sum of the numerators divided by the sum of denominators:
 
 ```
     var m = (n1 + n2) / (d1 + d2);
@@ -118,7 +118,7 @@ is not correct for the range `B>=2**32`.
   while(Q_1 < D) {
 ```
 
-> `a_k = [b_k]`, i.e., the greatest integer `<= b_k`
+> `a_k = [b_k]`, the greatest integer `<= b_k`
 
 ```
     A = Math.floor(B);
@@ -166,6 +166,7 @@ Finally we put some export jazz:
 
 ```
 /*:: declare var DO_NOT_EXPORT_FRAC: any; */
+// eslint-disable-next-line no-undef
 if(typeof module !== 'undefined' && typeof DO_NOT_EXPORT_FRAC === 'undefined') module.exports = frac;
 ```
 
@@ -243,27 +244,37 @@ xltestfiles.forEach(function(x) {
 ```json>package.json
 {
   "name": "frac",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "SheetJS",
   "description": "Rational approximation with bounded denominator",
   "keywords": [ "math", "fraction", "rational", "approximation" ],
-  "main": "frac.js",
+  "main": "./frac",
+  "types": "types",
   "dependencies": {
     "voc":"~1.0.0"
   },
   "devDependencies": {
-    "mocha":"~2.5.3"
+    "mocha":"~2.5.3",
+    "blanket": "~1.2.3",
+    "codepage":"~1.10.0",
+    "@sheetjs/uglify-js":"~2.7.3",
+    "@types/node":"^8.0.7",
+    "dtslint": "^0.1.2",
+    "typescript": "2.2.0"
   },
   "repository": { "type":"git", "url":"git://github.com/SheetJS/frac.git" },
   "scripts": {
-    "test": "make test"
+    "test": "make test",
+    "build": "make",
+    "lint": "make fullint",
+    "dtslint": "dtslint types"
   },
   "config": {
     "blanket": {
       "pattern": "frac.js"
     }
   },
-  "homepage": "http://oss.sheetjs.com/frac",
+  "homepage": "http://sheetjs.com/opensource",
   "bugs": { "url": "https://github.com/SheetJS/frac/issues" },
   "license": "Apache-2.0",
   "engines": { "node": ">=0.8" }
@@ -294,6 +305,7 @@ MANIFEST
 *.tgz
 *.py
 *.html
+.spelling
 ```
 
 Don't include the node modules in git:

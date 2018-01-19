@@ -39,4 +39,5 @@ frac.cont = function cont(x/*:number*/, D/*:number*/, mixed/*:?boolean*/)/*:Arra
   return [q, sgn*P - q*Q, Q];
 };
 /*:: declare var DO_NOT_EXPORT_FRAC: any; */
+// eslint-disable-next-line no-undef
 if(typeof module !== 'undefined' && typeof DO_NOT_EXPORT_FRAC === 'undefined') module.exports = frac;

@@ -42,6 +42,9 @@ ctest: ## Build browser test (into ctest/ subdirectory)
 ctestserv: ## Start a test server on port 8000
 	@cd ctest && python -mSimpleHTTPServer
 
+.PHONY: fullint
+fullint: lint old-lint tslint flow mdlint ## Run all checks
+
 .PHONY: lint
 lint: $(TARGET) $(AUXTARGETS) ## Run eslint checks
 	@eslint --ext .js,.njs,.json,.html,.htm $(TARGET) $(AUXTARGETS) $(CMDS) $(HTMLLINT) package.json bower.json
@@ -56,6 +59,12 @@ old-lint: $(TARGET) $(AUXTARGETS) ## Run jshint and jscs checks
 	@jscs $(TARGET) $(AUXTARGETS)
 	if [ -e $(CLOSURE) ]; then java -jar $(CLOSURE) $(REQS) $(FLOWTARGET) --jscomp_warning=reportUnknownTypes >/dev/null; fi
 
+.PHONY: tslint
+tslint: $(TARGET) ## Run typescript checks
+	#@npm install dtslint typescript
+	#@npm run-script dtslint
+	dtslint types
+
 .PHONY: flow
 flow: lint ## Run flow checker
 	@flow check --all --show-all-errors
@@ -69,6 +78,12 @@ misc/coverage.html: $(TARGET) test.js
 .PHONY: coveralls
 coveralls: ## Coverage Test + Send to coveralls.io
 	mocha --require blanket --reporter mocha-lcov-reporter -t 20000 | node ./node_modules/coveralls/bin/coveralls.js
+
+MDLINT=README.md frac.md
+.PHONY: mdlint
+mdlint: $(MDLINT) ## Check markdown documents
+	alex $^
+	mdspell -a -n -x -r --en-us $^
 
 .PHONY: dist
 dist: dist-deps $(TARGET) ## Prepare JS files for distribution
