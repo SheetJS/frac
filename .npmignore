@@ -1,3 +1,5 @@
+frac.flow.js
+frac.md
 test_files/*.tsv
 ctest/
 test.js
@@ -7,6 +9,7 @@ Makefile
 node_modules/
 coverage.html
 .travis.yml
+.eslintrc
 .jshintrc
 .jscs.json
 .flowconfig

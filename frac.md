@@ -244,21 +244,20 @@ xltestfiles.forEach(function(x) {
 ```json>package.json
 {
   "name": "frac",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "author": "SheetJS",
   "description": "Rational approximation with bounded denominator",
   "keywords": [ "math", "fraction", "rational", "approximation" ],
   "main": "./frac",
   "types": "types",
-  "dependencies": {
-    "voc":"~1.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "mocha":"~2.5.3",
+    "voc": "~1.1.0",
+    "mocha": "~2.5.3",
     "blanket": "~1.2.3",
-    "codepage":"~1.10.0",
-    "@sheetjs/uglify-js":"~2.7.3",
-    "@types/node":"^8.0.7",
+    "codepage": "~1.10.0",
+    "@sheetjs/uglify-js": "~2.7.3",
+    "@types/node": "^8.0.7",
     "dtslint": "^0.1.2",
     "typescript": "2.2.0"
   },
@@ -284,6 +283,8 @@ xltestfiles.forEach(function(x) {
 And to make sure that test files are not included in npm:
 
 ```>.npmignore
+frac.flow.js
+frac.md
 test_files/*.tsv
 ctest/
 test.js
@@ -293,6 +294,7 @@ Makefile
 node_modules/
 coverage.html
 .travis.yml
+.eslintrc
 .jshintrc
 .jscs.json
 .flowconfig

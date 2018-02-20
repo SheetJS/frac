@@ -1,7 +1,7 @@
 from distutils.core import setup
 setup(
 	name='frac',
-	version='1.0.5',
+	version='1.1.2',
 	author='SheetJS',
 	author_email='dev@sheetjs.com',
 	url='http://oss.sheetjs.com/frac',

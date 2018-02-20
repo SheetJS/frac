@@ -49,10 +49,9 @@ def med(x, D, mixed=False):
 def cont(x, D, mixed=False):
     """Generate fraction representation using Aberth method"""
     B = abs(x)
-    I = int
     P_2, P_1, P, Q_2, Q_1, Q = 0, 1, 0, 1, 0, 0
     while Q_1 < D:
-        A = I(B)
+        A = int(B)
         P = A * P_1 + P_2
         Q = A * Q_1 + Q_2
         if (B - A) < 0.00000005:
