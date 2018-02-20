@@ -7,7 +7,7 @@
   "main": "./frac",
   "types": "types",
   "dependencies": {
-    "voc":"~1.0.0"
+    "voc":"^1.0.0"
   },
   "devDependencies": {
     "mocha":"~2.5.3",
