@@ -1,0 +1,9 @@
+.gitignore
+node_modules/
+coverage.html
+*.sheetjs
+*.pyc
+build/
+MANIFEST
+*.gz
+*.tgz

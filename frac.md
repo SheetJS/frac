@@ -258,10 +258,11 @@ xltestfiles.forEach(function(x) {
     "codepage": "~1.10.0",
     "@sheetjs/uglify-js": "~2.7.3",
     "@types/node": "^8.0.7",
+    "brfs": "^2.0.2",
     "dtslint": "^0.1.2",
     "typescript": "2.2.0"
   },
-  "repository": { "type":"git", "url":"git://github.com/SheetJS/frac.git" },
+  "repository": { "type": "git", "url": "git://github.com/SheetJS/frac.git" },
   "scripts": {
     "test": "make test",
     "build": "make",

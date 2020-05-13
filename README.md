@@ -102,6 +102,10 @@ The test TSV baselines in the `test_files` directory have four columns:
 
 `make test` will run the node-based tests.
 
+`make ctest` will use `browserify` to build a standalone script that can be run
+in the web browser.  The transform `brfs` must be installed locally.  Browser
+test script built against `browserfy@16.5.1` and `brfs@2.0.2`.
+
 `make pytest` will run the python tests against the system Python version.
 
 `make pypytest` will run the python tests against `pypy` if installed
@@ -122,7 +126,5 @@ granted by the Apache 2.0 License are reserved by the Original Author.
 [![NPM Downloads](https://img.shields.io/npm/dt/frac.svg)](https://npmjs.org/package/frac)
 
 [![Dependencies Status](https://david-dm.org/sheetjs/frac/status.svg)](https://david-dm.org/sheetjs/frac)
-
-[![ghit.me](https://ghit.me/badge.svg?repo=sheetjs/js-xlsx)](https://ghit.me/repo/sheetjs/js-xlsx)
 
 [![Analytics](https://ga-beacon.appspot.com/UA-36810333-1/SheetJS/frac?pixel)](https://github.com/SheetJS/frac)
